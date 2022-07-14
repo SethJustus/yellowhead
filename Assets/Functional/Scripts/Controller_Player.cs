@@ -15,6 +15,8 @@ public class Controller_Player : MonoBehaviour
     public float AirWalk;
     public float rollSpeed;
     public bool jumpContinuously;
+    public GameObject groundedPoint;
+    public Vector2 SafePosition;
     //Dialogue Params
     public bool Listening;
     //Holder Variables
@@ -31,8 +33,8 @@ public class Controller_Player : MonoBehaviour
     void Start()
     {
         this.character = GetComponent<Character>();
-        JumpPower = JumpPower*character.rb.mass*character.rb.gravityScale;
-        FloatPower = FloatPower*character.rb.mass*character.rb.gravityScale;
+        //JumpPower = JumpPower*character.rb.mass*character.rb.gravityScale;
+        //FloatPower = FloatPower*character.rb.mass*character.rb.gravityScale;
     }
     private float walk;
     private float listening;
@@ -46,11 +48,24 @@ public class Controller_Player : MonoBehaviour
         jump = Input.GetAxisRaw("Jump");
         roll = Input.GetAxisRaw("Vertical");
         #endregion
+        if (jump <= 0)
+        {
+            //if (character.isGrounded())
+            //{
+            //    SafePosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
+            //    Instantiate(groundedPoint, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y - 1.2f), Quaternion.identity);
+            //    canJump = true;
+            //    canJump = true;
+            //    isJumping = false;
+            //    jumpTimer = 0;
+            //}
+            //else
+            //{
 
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
+            //    canJump = false;
+            //}
+        }
+
     }
     void FixedUpdate()
     {
@@ -67,29 +82,18 @@ public class Controller_Player : MonoBehaviour
         #endregion
         
         #region Handle Jump Input
-        if(jump<=0)
-        {
-            if(character.isGrounded())
-            {
-                canJump = true;
-                isJumping = false;
-                jumpTimer = 0;
-            }else
-            {
-            
-                canJump = false;
-            }
-        }
+        
+
         if(canJump)
         {
             if(jump>0)
-            {       
+            {
                 
-                if(jumpContinuously)
+                if (jumpContinuously)
                 {
                     if(!isJumping)
                     {
-                        character.rb.AddForce(transform.up*JumpPower,ForceMode2D.Impulse);
+                        //character.rb.AddForce(transform.up*JumpPower,ForceMode2D.Impulse);
                         isJumping = true;
                     }
                     jumpTimer += 1;                    
@@ -102,7 +106,7 @@ public class Controller_Player : MonoBehaviour
                 {
                     canJump = false;
                 } 
-                character.Jump(FloatPower, jumpContinuously);
+                //character.Jump(FloatPower, jumpContinuously);
             }
         }
 
@@ -112,31 +116,35 @@ public class Controller_Player : MonoBehaviour
         if(walk>0)
         {
             facingRight = true;
-            character.WalkRight(RealWalkSpeed);
+            //character.WalkRight(RealWalkSpeed);
         }else if(walk<0)
         {
             facingRight=false;
-            character.WalkLeft(RealWalkSpeed);
+            //character.WalkLeft(RealWalkSpeed);
         }
         #endregion
 
         #region Set Dynamic RigidBody Settings
-        character.rb.drag = Drag;
-        if(character.isGrounded())
-        {
-            Drag = GroundDrag;
-            RealWalkSpeed = WalkSpeed;
-        }else
-        {
-            RealWalkSpeed = WalkSpeed/AirWalk;
-            Drag = AirDrag;
-        }
+        //character.rb.drag = Drag;
+        //if(character.isGrounded())
+        //{
+        //    Drag = GroundDrag;
+        //    RealWalkSpeed = WalkSpeed;
+        //}else
+        //{
+        //    RealWalkSpeed = WalkSpeed/AirWalk;
+        //    Drag = AirDrag;
+        //}
         #endregion
         #region Handel Roll Input
         if(roll<0&&!rolling)
         {
-            character.Roll(facingRight, rollSpeed, rolling);
+            //character.Roll(facingRight, rollSpeed, rolling);
         }
         #endregion
+        if(Input.GetKey(KeyCode.R))
+        {
+            //character.Respawn(SafePosition.x,SafePosition.y);
+        }
     }
 }

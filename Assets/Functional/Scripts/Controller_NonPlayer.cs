@@ -20,10 +20,11 @@ public class Controller_NonPlayer : MonoBehaviour
     {
         Debug.Log("Starting Dialogue!");
         sentences.Clear();
-        foreach(string sentence in dialogue.sentences)
-        {
-            this.sentences.Enqueue(sentence);
-        }
+        sentences.Clear();
+        //foreach(string sentence in dialogue.sentences)
+        //{
+        //    this.sentences.Enqueue(sentence);
+        //}
         
         DisplayNextSentence();       
     }
@@ -86,7 +87,7 @@ public class Controller_NonPlayer : MonoBehaviour
         {
             if(playerDistance<DistanceToReact)
             {
-                dialogueText.text = "Listen to "+ dialogue.name;
+                //dialogueText.text = "Listen to "+ dialogue.name;
             }else
             {
                 dialogueText.text = "";

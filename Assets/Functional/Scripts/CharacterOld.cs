@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Character : MonoBehaviour
+public class CharacterOld : MonoBehaviour
 {
     public Rigidbody2D rb;
     public bool isTalking()
     {
         return false;
     }
+
     public bool isGrounded()
     {      
         return Physics2D.BoxCast(transform.position, new Vector2(transform.localScale.x, transform.localScale.y), 0f, Vector2.down, 1.2f, game.ground);
         
+    }
+    public void Respawn(float posx,float posy)
+    {
+        rb.position = new Vector2(posx, posy);
     }
     public void Jump(float jumpPower, bool jumpCont)
     {

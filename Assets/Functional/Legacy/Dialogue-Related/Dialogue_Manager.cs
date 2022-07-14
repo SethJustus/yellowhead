@@ -32,10 +32,10 @@ public class Dialogue_Manager : MonoBehaviour
         playerState.talking = true;
         display.SetActive(true);
         sentences.Clear();
-        foreach(string sentence in dialogue.sentences)
-        {
-            sentences.Enqueue(sentence);
-        }
+        //foreach(string sentence in dialogue.sentences)
+        //{
+        //    sentences.Enqueue(sentence);
+        //}
         
         DisplayNextSentence();   
         displaying = true;     
